@@ -27,16 +27,15 @@ const imgContainer = document.createElement("div");
 const authorPhoto = document.createElement("img");
 const authorName = document.createElement("span");
 
+
 cardDiv.classList.add("card");
 headline.classList.add("headline");
 author.classList.add("author");
 imgContainer.classList.add("img-container");
 
-
 headline.textContent = article.headline;
 authorName.textContent = `By ${article.authorName}`;
 authorPhoto.src = article.authorPhoto;
-
 
 cardDiv.appendChild(headline);
 cardDiv.appendChild(author);
@@ -48,10 +47,14 @@ author.appendChild(authorPhoto);
 author.appendChild(authorName);
 imgContainer.appendChild(authorPhoto);
 
+cardDiv.addEventListener("click", () => {
+  console.log(article.headline);
+})
 
 return cardDiv
 
 }
+
 
 const cardAppender = (selector) => {
   // TASK 6
