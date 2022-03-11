@@ -27,21 +27,27 @@ const imgContainer = document.createElement("div");
 const authorPhoto = document.createElement("img");
 const authorName = document.createElement("span");
 
-
 cardDiv.classList.add("card");
 headline.classList.add("headline");
 author.classList.add("author");
 imgContainer.classList.add("img-container");
 
+
 headline.textContent = article.headline;
+authorName.textContent = `By ${article.authorName}`;
 authorPhoto.src = article.authorPhoto;
-authorName.textContent = article.authorName;
+
 
 cardDiv.appendChild(headline);
 cardDiv.appendChild(author);
 cardDiv.appendChild(imgContainer);
-imgContainer.appendChild(authorPhoto);
+cardDiv.appendChild(authorPhoto);
 cardDiv.appendChild(authorName);
+author.appendChild(imgContainer);
+author.appendChild(authorPhoto);
+author.appendChild(authorName);
+imgContainer.appendChild(authorPhoto);
+
 
 return cardDiv
 
@@ -59,7 +65,30 @@ const cardAppender = (selector) => {
 const cardSelector = document.querySelector(selector);
 axios.get("http://localhost:5000/api/articles")
 .then(res => {
-  console.log(res)
+  console.log(res.data.articles)
+  
+  res.data.articles.bootstrap.forEach(elem => {
+  const bootsCard = Card(elem);
+  cardSelector.appendChild(bootsCard);
+  })
+  res.data.articles.javascript.forEach(elem => {
+    const javasCard = Card(elem);
+    cardSelector.appendChild(javasCard);
+    })
+    res.data.articles.jquery.forEach(elem => {
+      const jqueryCard = Card(elem);
+      cardSelector.appendChild(jqueryCard);
+      })
+      res.data.articles.node.forEach(elem => {
+        const nodeCard = Card(elem);
+        cardSelector.appendChild(nodeCard);
+        })
+        res.data.articles.technology.forEach(elem => {
+          const technologyCard = Card(elem);
+          cardSelector.appendChild(technologyCard);
+          })
+ 
+  
 })
 
 
