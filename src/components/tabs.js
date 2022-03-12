@@ -16,33 +16,32 @@ const Tabs = (topics) => {
   // </div>
   //
 
-  const topic = document.createElement("div");
+  const topicsDiv = document.createElement("div");
   const javascript = document.createElement("div");
   const bootstrap = document.createElement("div");
   const technology = document.createElement("div");
   const jquery = document.createElement("div");
   const nodeJs = document.createElement("div");
 
-topic.classList.add("topics");
-javascript.classList.add("tab");
-bootstrap.classList.add("tab");
-technology.classList.add("tab");
-jquery.classList.add("tab");
-nodeJs.classList.add("tab");
+ 
+  topicsDiv.classList.add("topics");
+  javascript.classList.add("tab");
+  bootstrap.classList.add("tab");
+  technology.classList.add("tab");
+  jquery.classList.add("tab");
+  nodeJs.classList.add("tab");
 
-javascript.textContent = topics[0];
-bootstrap.textContent = topics[1];
-technology.textContent = topics[2];
-jquery.textContent = topics[3];
-nodeJs.textContent = topics[4];
+  javascript.textContent = topics;
+  bootstrap.textContent = topics;
+  technology.textContent = topics;
+  jquery.textContent = topics;
+  nodeJs.textContent = topics;
 
-topic.appendChild(javascript);
-topic.appendChild(bootstrap);
-topic.appendChild(technology);
-topic.appendChild(jquery);
-topic.appendChild(nodeJs);
 
-return topic;
+  topicsDiv.appendChild(javascript, bootstrap, technology);
+
+
+  return topicsDiv;
 
 }
 
@@ -54,20 +53,20 @@ const tabsAppender = (selector) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
-const tabSelector = document.querySelector(selector);
-console.log(tabSelector)
-axios.get("http://localhost:5000/api/topics")
-.then(res => {
-  console.log(res.data.topics)
-  
-  res.data.topics.forEach(topic => {
-    const tabMaker = Tabs(topic);
-    console.log(tabMaker)
-    
-    tabSelector.appendChild(tabMaker)
-  })
-  
-})
+  const tabSelector = document.querySelector(selector);
+  console.log(tabSelector)
+
+  axios.get("http://localhost:5000/api/topics")
+    .then(res => {
+      console.log(res.data.topics)
+
+      res.data.topics.forEach(elem => {
+        const tabMaker = Tabs(elem);
+        console.log(tabMaker)
+        tabSelector.appendChild(tabMaker)
+      })
+
+    })
 
 
 

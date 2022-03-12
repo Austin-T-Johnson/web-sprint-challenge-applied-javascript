@@ -68,7 +68,7 @@ const cardAppender = (selector) => {
 const cardSelector = document.querySelector(selector);
 axios.get("http://localhost:5000/api/articles")
 .then(res => {
-  console.log(res.data.articles)
+  // console.log(res.data.articles)
   
   res.data.articles.bootstrap.forEach(elem => {
   const bootsCard = Card(elem);
