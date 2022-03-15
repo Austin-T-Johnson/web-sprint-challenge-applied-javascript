@@ -19,19 +19,27 @@ const Tabs = (topics) => {
  const javascript = document.createElement("div");
  const bootstrap = document.createElement("div");
  const technology = document.createElement("div");
+ const jquery = document.createElement("div");
+ const nodeJs = document.createElement("div");
 
  topicsDiv.classList.add("topics");
  javascript.classList.add("tab");
  bootstrap.classList.add("tab");
  technology.classList.add("tab");
+ jquery.classList.add("tab");
+ nodeJs.classList.add("tab");
 
 javascript.textContent = topics[0];
 bootstrap.textContent = topics[1];
 technology.textContent = topics[2];
+jquery.textContent = topics[3];
+nodeJs.textContent = topics[4];
 
 topicsDiv.appendChild(javascript);
 topicsDiv.appendChild(bootstrap);
 topicsDiv.appendChild(technology);
+topicsDiv.appendChild(jquery);
+topicsDiv.appendChild(nodeJs);
 
 
  return topicsDiv;
@@ -44,36 +52,15 @@ const tabsAppender = (selector) => {
   // It should obtain topics from this endpoint: `http://localhost:5000/api/topics` (test it with a console.log!).
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
-  function creatingDiv(input) {
-    const divArr = []
-    for (let i = 0; i < input.length; i++) {
-      divArr.push(Object.assign(document.createElement('div'), {
-        className: 'tab',
-        textContent: input[i]
-      }))
-    }
-    return divArr
-  }
-  
-  const tabTopics = (topics) => {
-    const divTopics = Object.assign(document.createElement('div'), {
-      className: 'topics'
-    });
-    for (let i = 0; i < topics.length; i++) {
-      divTopics.appendChild(topics[i]);
-    }
-  
-    return divTopics
-  }
+  // 
   const tabsContainer = document.querySelector(selector);
-  
-  axios.get('http://localhost:5000/api/topics')
-    .then((resp) => {
-      const topicsData = tabTopics(creatingDiv(resp.data.topics))
-      tabsContainer.appendChild(topicsData)
+    axios.get("http://localhost:5000/api/topics")
+    .then(res => {
+      console.log(res.data.topics)
+      const tabTopics = Tabs(res.data.topics);
+      tabsContainer.appendChild(tabTopics);
     })
-
-    
+     
 
    
 
